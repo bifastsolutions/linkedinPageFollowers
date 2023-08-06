@@ -25,26 +25,31 @@ metas e projeções.
 ●	Entre em https://developer.linkedin.com/ 
 ●	Realize o acesso utilizando suas credenciais, navegue até a seção "My Apps" e clique em "Create app". Nesse local, será necessário preencher os dados solicitados, tais como o título da aplicação, o endereço da página de sua empresa no LinkedIn e o logotipo.
 
+![Create an app](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/fc2fff91-920f-4221-a5fb-cf9d4e56b79c)
 
-![Create an app](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/18325286-d3ff-4d65-af3e-7c28acdb5004)
 
 ●	Após concluir a criação do aplicativo, acesse a seção de "Settings" e proceda com a verificação do app. Gere a URL na etapa seguinte, copie-a e cole-a na barra de endereços do navegador. Em seguida, você será redirecionado para uma tela de confirmação indicando que a verificação foi realizada com sucesso.
 
-![Settings](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/97ceae70-5c7a-470d-9d27-dd1fb6a72c9d)
+![Settings](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/98b14d4b-f5e4-497b-a18a-af113ff42c6b)
+
 
 ●	Na seção de "products" terá as opções do que é possível fazer com a API do LinkedIn junto com a documentação para cada caso, onde mostra como você deve utilizar ao fazer os "requests". Libere o acesso pelo "Request access".
 
-![Products](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/c1ce133d-c2e1-433a-8ec6-af18be2e3979)
+![Products](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/ece6bf2b-f11b-4b41-8426-a0a0f2ca6101)
+
 
 ● Com o intuito de gerar o token de verificação para acesso aos itens disponíveis, é necessário acessar a seção de Auth e selecionar a alternativa localizada ao lado direito denominada  OAuth 2.0 tools.
 
-![Page 4](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/b5be28dd-673b-4f8b-b6bc-e3d4e6fd93bf)
+![OAuth 2.0 tools](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/d158c4dc-a6a6-4311-9386-7312a535336f)
+
 
 ●	Entre em "create token", escolha os scopes(permissões) desejados e crie seu token para utilização.
 
-![Oauth 2.0 tools](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/5c974624-579d-4da3-97f8-d306ef5237b7)
 
-![Token](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/a5c13e9d-0860-425e-bd18-75ea73916a60)
+![create token](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/51da68c1-ce94-438e-8cc8-a05b26df78ed)
+
+
+![Token](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/79836aae-ad85-4d1e-b965-d20109c0ab1f)
 
 ● Após concluir essas etapas, você obterá o seu token de acesso, permitindo que você faça solicitações de acordo com os products que foram selecionados. É importante lembrar que cada product possui sua própria documentação exclusiva para realizar as solicitações.
 
