@@ -16,7 +16,18 @@ metas e projeções.
 - Irei conseguir alcançar meus objetivos comerciais?
 - Essa solução irá me ajudar a melhorar a experiência do meu cliente?
 
-![Pipeline linkedinFollowers](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/cc40f3e2-5884-4c65-bcad-3a3301a53d34)
+# Pipeline de dados
+
+![Pipeline linkedinFollowers](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/9af205f5-e287-4584-852a-3acc37bafd0d)
+
+## Serviços da AWS utilizados
+
+- S3
+- EC2
+- Lambda
+- eventBridget
+- Glue(Crawler e Catalog)
+- Athena
 
 # Desenvolvimento da solução
 
