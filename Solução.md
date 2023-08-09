@@ -109,7 +109,6 @@ A classe MIMEText é usada para criar uma parte de conteúdo de e-mail em format
 boto3:
 
 A biblioteca boto3 é usada para interagir com os serviços da AWS (Amazon Web Services).
-
 No contexto deste código, é usada para interagir com o serviço Amazon S3 (Simple Storage Service) para salvar o DataFrame como um arquivo CSV.
 É necessário ter as credenciais corretamente configuradas para usar o boto3 e acessar os recursos da AWS.
 Essas bibliotecas são componentes essenciais que permitem ao código realizar tarefas específicas, como requisições HTTP, manipulação de dados, envio de e-mails e interação com serviços da AWS. Cada biblioteca traz funcionalidades especializadas que são utilizadas para atender às necessidades do programa.
