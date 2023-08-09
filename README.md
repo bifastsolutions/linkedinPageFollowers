@@ -10,7 +10,7 @@ Como utilizar a API do linkedin para acompanhar o crescimento dos seguidores da 
 
 # Principais objetivos do projeto
 
-- AExtrção dos dados via API
+- Extrção dos dados via API
 - Armazenamento em um repositorio seguro
 - Automatização 
 - Possibilidade de cruzar os dados com outras fontes e dados de redes sociais
