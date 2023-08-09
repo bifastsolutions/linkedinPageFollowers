@@ -64,6 +64,13 @@ metas e projeções.
 ![Permissões depois de ativar advertising API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/b26bfa33-264c-48f1-9490-0023d5bf045f)
 
 
+# Solução
+
+Como se trata de algo muito simples, não vi a necessidade de separar os dados da API em zonas em uma Data Lake, usei apenas um código que realiza a extração, tratamento e carga no S3, sendo nesse caso um ETL e não um ELT, o código não demora nem 10s para rodar e carregar os dados que são feitos diariamente, o código foi todo feito em OOP pois achei melhor a divisão das class como blocos onde cada um executa uma determinada ação, deixando assim mais organizado, estarei explicando tudo com mais detalhes abaixo mostrando o código.
+
+## Desenvolvimento do código em Python
+
+
 
 
 
