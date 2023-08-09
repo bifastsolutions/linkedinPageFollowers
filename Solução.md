@@ -90,18 +90,22 @@ pandas (importado como pd):
 A biblioteca pandas é uma poderosa biblioteca para análise e manipulação de dados em Python.
 Ela é usada para realizar operações como normalização de dados JSON, transformações em DataFrames, manipulação de datas e horas, seleção de colunas, e, finalmente, para salvar um DataFrame em um arquivo CSV.
 O DataFrame é uma estrutura de dados tabular semelhante a uma tabela de banco de dados e é amplamente usado para trabalhar com dados estruturados.
+
 datetime:
 
 A biblioteca datetime é usada para trabalhar com datas e horas em Python.
 Ela é utilizada neste código para calcular as datas de início e fim do intervalo desejado e para manipular informações temporais, como a criação de objetos de data e hora.
+
 smtplib:
 
 A biblioteca smtplib faz parte da biblioteca padrão do Python e é usada para enviar e-mails utilizando o protocolo SMTP (Simple Mail Transfer Protocol).
 No contexto do código, a classe EmailSender utiliza a smtplib para se conectar a um servidor SMTP (neste caso, o servidor do Outlook) e enviar um e-mail de alerta.
+
 email.mime.text (importado como MIMEText):
 
 Esta é uma submódulo da biblioteca email padrão do Python, que fornece classes para criar e manipular mensagens de e-mail.
 A classe MIMEText é usada para criar uma parte de conteúdo de e-mail em formato de texto, que pode ser usado para criar o corpo de um e-mail com suporte a HTML.
+
 boto3:
 
 A biblioteca boto3 é usada para interagir com os serviços da AWS (Amazon Web Services).
