@@ -66,11 +66,49 @@ metas e projeções.
 
 # Solução
 
-Como se trata de algo muito simples, não vi a necessidade de separar os dados da API em zonas em uma Data Lake, usei apenas um código que realiza a extração, tratamento e carga no S3, sendo nesse caso um ETL e não um ELT, o código não demora nem 10s para rodar e carregar os dados que são feitos diariamente, o código foi todo feito em OOP pois achei melhor a divisão das class como blocos onde cada um executa uma determinada ação, deixando assim mais organizado, estarei explicando tudo com mais detalhes abaixo mostrando o código.
+Como se trata de algo muito simples, não vi a necessidade de separar os dados da API em zonas em uma Data Lake, usei apenas um código que realiza a extração, tratamento e carga no S3, sendo nesse caso um ETL e não um ELT, o código não demora nem 10s para rodar e carregar os dados que são feitos diariamente, o código foi todo feito em OOP pois achei melhor a divisão das class e suas funções como blocos onde cada um executa uma determinada ação, deixando assim mais organizado, estarei explicando tudo com mais detalhes abaixo mostrando o código.
 
 ## Desenvolvimento do código em Python
 
+### Class LinkedInAPI
 
+```python
+import requests
+import pandas as pd
+import datetime
+import smtplib
+from email.mime.text import MIMEText
+import boto3
+```
+
+requests:
+
+A biblioteca requests é usada para fazer requisições HTTP. No contexto desse código, ela é utilizada para fazer requisições GET à API do LinkedIn para obter os dados das estatísticas de seguidores da organização.
+
+pandas (importado como pd):
+
+A biblioteca pandas é uma poderosa biblioteca para análise e manipulação de dados em Python.
+Ela é usada para realizar operações como normalização de dados JSON, transformações em DataFrames, manipulação de datas e horas, seleção de colunas, e, finalmente, para salvar um DataFrame em um arquivo CSV.
+O DataFrame é uma estrutura de dados tabular semelhante a uma tabela de banco de dados e é amplamente usado para trabalhar com dados estruturados.
+datetime:
+
+A biblioteca datetime é usada para trabalhar com datas e horas em Python.
+Ela é utilizada neste código para calcular as datas de início e fim do intervalo desejado e para manipular informações temporais, como a criação de objetos de data e hora.
+smtplib:
+
+A biblioteca smtplib faz parte da biblioteca padrão do Python e é usada para enviar e-mails utilizando o protocolo SMTP (Simple Mail Transfer Protocol).
+No contexto do código, a classe EmailSender utiliza a smtplib para se conectar a um servidor SMTP (neste caso, o servidor do Outlook) e enviar um e-mail de alerta.
+email.mime.text (importado como MIMEText):
+
+Esta é uma submódulo da biblioteca email padrão do Python, que fornece classes para criar e manipular mensagens de e-mail.
+A classe MIMEText é usada para criar uma parte de conteúdo de e-mail em formato de texto, que pode ser usado para criar o corpo de um e-mail com suporte a HTML.
+boto3:
+
+A biblioteca boto3 é usada para interagir com os serviços da AWS (Amazon Web Services).
+
+No contexto deste código, é usada para interagir com o serviço Amazon S3 (Simple Storage Service) para salvar o DataFrame como um arquivo CSV.
+É necessário ter as credenciais corretamente configuradas para usar o boto3 e acessar os recursos da AWS.
+Essas bibliotecas são componentes essenciais que permitem ao código realizar tarefas específicas, como requisições HTTP, manipulação de dados, envio de e-mails e interação com serviços da AWS. Cada biblioteca traz funcionalidades especializadas que são utilizadas para atender às necessidades do programa.
 
 
 
