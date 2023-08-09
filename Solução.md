@@ -79,9 +79,9 @@ metas e projeções.
 
 Como se trata de algo muito simples, não vi a necessidade de separar os dados da API em zonas em uma Data Lake, usei apenas um código que realiza a extração, tratamento e carga no S3, sendo nesse caso um ETL e não um ELT, o código não demora nem 10s para rodar e carregar os dados que são feitos diariamente, o código foi todo feito em OOP pois achei melhor a divisão das class e suas funções como blocos onde cada um executa uma determinada ação, deixando assim mais organizado, estarei explicando tudo com mais detalhes abaixo mostrando o código.
 
-## Desenvolvimento do código em Python
+# Desenvolvimento do código em Python
 
-### Class LinkedInAPI
+## Bibliotecas
 
 ```python
 import requests
@@ -125,6 +125,24 @@ No contexto deste código, é usada para interagir com o serviço Amazon S3 (Sim
 Essas bibliotecas são componentes essenciais que permitem ao código realizar tarefas específicas, como requisições HTTP, manipulação de dados, envio de e-mails e interação com serviços da AWS. Cada biblioteca traz funcionalidades especializadas que são utilizadas para atender às necessidades do programa.
 
 
+### Class LinkedInAPI
 
+```python
+class LinkedInAPI:
+    def __init__(self, access_token, api_url):
+        self.access_token = access_token
+        self.api_url = api_url
+        self.headers = {
+            'Authorization': 'Bearer ' + self.access_token,
+            'Content-Type': 'application/json',
+            'Accept-Language': 'en-US'
+        }
 
+    def fetch_data(self, params):
+        response = requests.get(self.api_url, params=params, headers=self.headers)
+        return response.json() if response.status_code == 200 else None
+```
 
+Esta classe é responsável por encapsular a interação com a API do LinkedIn.
+O construtor __init__ recebe um token de acesso (access_token) e a URL da API (api_url), e configura os cabeçalhos necessários para as requisições.
+O método fetch_data recebe parâmetros, faz uma requisição GET à API usando o token e os cabeçalhos configurados, e retorna os dados da resposta no formato JSON se a resposta for bem-sucedida (status code 200) ou None caso contrário.
