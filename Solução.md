@@ -125,6 +125,8 @@ No contexto deste código, é usada para interagir com o serviço Amazon S3 (Sim
 Essas bibliotecas são componentes essenciais que permitem ao código realizar tarefas específicas, como requisições HTTP, manipulação de dados, envio de e-mails e interação com serviços da AWS. Cada biblioteca traz funcionalidades especializadas que são utilizadas para atender às necessidades do programa.
 
 
+
+
 ### Class LinkedInAPI
 
 ```python
@@ -146,6 +148,7 @@ class LinkedInAPI:
 Esta classe é responsável por encapsular a interação com a API do LinkedIn.
 O construtor __init__ recebe um token de acesso (access_token) e a URL da API (api_url), e configura os cabeçalhos necessários para as requisições.
 O método fetch_data recebe parâmetros, faz uma requisição GET à API usando o token e os cabeçalhos configurados, e retorna os dados da resposta no formato JSON se a resposta for bem-sucedida (status code 200) ou None caso contrário.
+Documentação da API para extração de dados de seguidores do LinkedIn: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/organizations/follower-statistics?view=li-lms-unversioned&tabs=curl Essa documentação é importante para preenchimento dos cabeçalhos necessários e outras informações do restante do código.
 
 ### Class DataProcessor
 
@@ -179,9 +182,19 @@ class DataProcessor:
     def save_to_s3(self, df, nome_arquivo):
         BUCKET_NAME = 'SEU_BUCKET'
         CAMINHO_NO_BUCKET = 'CAMINHO_BUCKET'
-        session = boto3.Session(profile_name='default')  # 'default' é o perfil no arquivo credentials
+        session = boto3.Session(profile_name='default')  # 'default' é o perfil no arquivo credentials da sua máquina (.aws)
         s3 = session.client('s3')
     
         csv_buffer = df.to_csv(index=False)
         s3.put_object(Body=csv_buffer, Bucket=BUCKET_NAME, Key=CAMINHO_NO_BUCKET + nome_arquivo)
 ```
+DataProcessor:
+
+Esta classe é responsável por processar os dados obtidos da API do LinkedIn.
+O método process_data recebe os dados brutos da API, além de datas de início e fim de intervalo(essas datas vem em milesegundos(ms)).
+Ele transforma os dados brutos em um DataFrame do pandas usando pd.json_normalize.
+Realiza transformações nas colunas de datas e renomeia colunas relevantes.
+Seleciona as colunas desejadas e salva o DataFrame em um arquivo CSV no Amazon S3 usando o método save_to_s3.
+Caso ocorra uma exceção do tipo KeyError, retorna False.
+"session = boto3.Session(profile_name='default')  # 'default' é o perfil no arquivo credentials da sua máquina (.aws)" essa parte
+do código é muito importante, pois evita que você passe as credenciais da AWS diretamente no código, deixando assim mais seguro.
