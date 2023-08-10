@@ -18,7 +18,7 @@ metas e projeções.
 
 # Pipeline de dados
 
-![Pipeline linkedinFollowers](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/9af205f5-e287-4584-852a-3acc37bafd0d)
+![Pipeline linkedinFollowers](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/c140cb83-01c2-426a-9b07-f5693feb4599)
 
 ## Serviços da AWS utilizados
 
@@ -146,3 +146,42 @@ class LinkedInAPI:
 Esta classe é responsável por encapsular a interação com a API do LinkedIn.
 O construtor __init__ recebe um token de acesso (access_token) e a URL da API (api_url), e configura os cabeçalhos necessários para as requisições.
 O método fetch_data recebe parâmetros, faz uma requisição GET à API usando o token e os cabeçalhos configurados, e retorna os dados da resposta no formato JSON se a resposta for bem-sucedida (status code 200) ou None caso contrário.
+
+### Class DataProcessor
+
+```python
+class DataProcessor:
+    def process_data(self, data, inicio_intervalo, fim_intervalo):
+        try:
+            df = pd.json_normalize(data, record_path='elements')
+
+            df['timeRange.start'] = pd.to_datetime(df['timeRange.start'], unit='ms')
+            df['timeRange.end'] = pd.to_datetime(df['timeRange.end'], unit='ms')
+
+            df = df.rename(columns={
+                'followerGains.organicFollowerGain': 'Ganhos de seguidores orgânicos',
+                'followerGains.paidFollowerGain': 'Ganhos de seguidores patrocinados',
+                'timeRange.start': 'Data',
+                'timeRange.end': 'Data final'
+            })
+
+            df = df[['organizationalEntity', 'Data', 'Ganhos de seguidores orgânicos', 'Ganhos de seguidores patrocinados']]
+
+            nome_arquivo = "follower_stats_" + fim_intervalo.strftime("%Y%m%d") + ".csv"
+
+            # Salvar o DataFrame no Amazon S3
+            self.save_to_s3(df, nome_arquivo)
+
+            return True
+        except KeyError:
+            return False
+
+    def save_to_s3(self, df, nome_arquivo):
+        BUCKET_NAME = 'SEU_BUCKET'
+        CAMINHO_NO_BUCKET = 'CAMINHO_BUCKET'
+        session = boto3.Session(profile_name='default')  # 'default' é o perfil no arquivo credentials
+        s3 = session.client('s3')
+    
+        csv_buffer = df.to_csv(index=False)
+        s3.put_object(Body=csv_buffer, Bucket=BUCKET_NAME, Key=CAMINHO_NO_BUCKET + nome_arquivo)
+```
