@@ -188,7 +188,6 @@ class DataProcessor:
         csv_buffer = df.to_csv(index=False)
         s3.put_object(Body=csv_buffer, Bucket=BUCKET_NAME, Key=CAMINHO_NO_BUCKET + nome_arquivo)
 ```
-DataProcessor:
 
 Esta classe é responsável por processar os dados obtidos da API do LinkedIn.
 O método process_data recebe os dados brutos da API, além de datas de início e fim de intervalo(essas datas vem em milesegundos(ms)).
