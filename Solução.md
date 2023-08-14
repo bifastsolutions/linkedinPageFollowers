@@ -90,6 +90,8 @@ import datetime
 import smtplib
 from email.mime.text import MIMEText
 import boto3
+import os
+from dotenv import load_dotenv
 ```
 
 requests:
@@ -124,6 +126,16 @@ No contexto deste código, é usada para interagir com o serviço Amazon S3 (Sim
 É necessário ter as credenciais corretamente configuradas para usar o boto3 e acessar os recursos da AWS.
 Essas bibliotecas são componentes essenciais que permitem ao código realizar tarefas específicas, como requisições HTTP, manipulação de dados, envio de e-mails e interação com serviços da AWS. Cada biblioteca traz funcionalidades especializadas que são utilizadas para atender às necessidades do programa.
 
+os:
+
+A biblioteca os é uma biblioteca padrão do Python que fornece funções para interagir com o sistema operacional, incluindo a manipulação de caminhos de arquivos, variáveis de ambiente, entre outros.
+No contexto do código, a biblioteca os não está sendo usada diretamente no código que você forneceu. No entanto, é comum utilizá-la para manipular caminhos de arquivos, checar a existência de arquivos ou diretórios, entre outras operações relacionadas ao sistema operacional.
+dotenv:
+
+A biblioteca dotenv não faz parte da biblioteca padrão do Python. É uma biblioteca de terceiros que permite carregar variáveis de ambiente a partir de um arquivo .env.
+No contexto deste código, a função principal do dotenv é carregar variáveis de ambiente a partir de um arquivo .env (caso exista) e torná-las disponíveis para o programa.
+Variáveis de ambiente podem conter informações sensíveis, como chaves de API, tokens de acesso, senhas etc. Carregar essas informações de um arquivo .env em vez de mantê-las diretamente no código-fonte ajuda a proteger essas informações sensíveis.
+
 
 
 
@@ -148,6 +160,7 @@ class LinkedInAPI:
 Esta classe é responsável por encapsular a interação com a API do LinkedIn.
 O construtor __init__ recebe um token de acesso (access_token) e a URL da API (api_url), e configura os cabeçalhos necessários para as requisições.
 O método fetch_data recebe parâmetros, faz uma requisição GET à API usando o token e os cabeçalhos configurados, e retorna os dados da resposta no formato JSON se a resposta for bem-sucedida (status code 200) ou None caso contrário.
+
 Documentação da API para extração de dados de seguidores do LinkedIn: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/organizations/follower-statistics?view=li-lms-unversioned&tabs=curl Essa documentação é importante para preenchimento dos cabeçalhos necessários e outras informações do restante do código.
 
 ### Class DataProcessor
@@ -197,3 +210,92 @@ Seleciona as colunas desejadas e salva o DataFrame em um arquivo CSV no Amazon S
 Caso ocorra uma exceção do tipo KeyError, retorna False.
 "session = boto3.Session(profile_name='default')  # 'default' é o perfil no arquivo credentials da sua máquina (.aws)" essa parte
 do código é muito importante, pois evita que você passe as credenciais da AWS diretamente no código, deixando assim mais seguro.
+
+Os arquivos são salvos no S3 com o nome padronizado em D-3 pois a API não disponibiliza os dados antes disso.
+
+![S3 Bucket](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/0bb1d64c-8428-4981-bf87-a8fec86d4bf5)
+
+
+### Class EmailSender:
+
+```python
+class EmailSender:
+    def send_email(self, mensagem):
+        load_dotenv("SEU_ARQUIVO.env")  # Carregar variáveis de ambiente do arquivo .env
+        remetente = os.environ.get('EMAIL_REMETENTE')
+        destinatario = os.environ.get('EMAIL_DESTINATARIO')
+        assunto = 'Alerta: Não há dados disponíveis'
+        corpo_email = f"""\
+            <html>
+                <body>
+                    <h3>{mensagem}</h3>
+                </body>
+            </html>
+            """
+        mime_text = MIMEText(corpo_email, 'html')
+        mime_text['From'] = remetente
+        mime_text['To'] = destinatario
+        mime_text['Subject'] = assunto
+        servidor_smtp = 'smtp-mail.outlook.com'
+        porta_smtp = 587
+        usuario_smtp = os.environ.get('SMTP_USUARIO')
+        senha_smtp = os.environ.get('SMTP_SENHA')
+
+        with smtplib.SMTP(servidor_smtp, porta_smtp) as servidor:
+            servidor.starttls()
+            servidor.login(usuario_smtp, senha_smtp)
+            servidor.send_message(mime_text)
+
+        print("E-mail enviado com sucesso!")
+```
+
+Esta classe lida com o envio de e-mails de alerta.
+O método send_email recebe uma mensagem como entrada.
+Ele configura informações como remetente, destinatário, assunto e conteúdo do e-mail.
+As informações de email e senha ficam em um arquivo separado .env por segurança para não ficar exposto direto no código.
+Utiliza a biblioteca smtplib para se conectar a um servidor SMTP (neste caso, o servidor do Outlook) e envia o e-mail.
+Imprime uma mensagem quando o e-mail é enviado com sucesso.
+
+### Função Main:
+
+
+```python
+def main():
+    ACCESS_TOKEN = 'SEU_TOKEN'
+    API_URL = 'https://api.linkedin.com/v2/organizationalEntityFollowerStatistics'
+
+    inicio_intervalo = datetime.date.today() - datetime.timedelta(days=3)
+    inicio_intervalo = datetime.datetime.combine(inicio_intervalo, datetime.time.min)
+
+    fim_intervalo = datetime.date.today() - datetime.timedelta(days=3)
+    fim_intervalo = datetime.datetime.combine(fim_intervalo, datetime.time.max)
+
+    params = {
+        'q': 'organizationalEntity',
+        'organizationalEntity': 'urn:li:organization:SEU_ORGANIZATION',
+        'timeIntervals.timeGranularityType': 'DAY',
+        'timeIntervals.timeRange.start': str(int(inicio_intervalo.timestamp() * 1000)),
+        'timeIntervals.timeRange.end': str(int(fim_intervalo.timestamp() * 1000))
+    }
+
+    linkedin_api = LinkedInAPI(ACCESS_TOKEN, API_URL)
+    data = linkedin_api.fetch_data(params)
+
+    if data:
+        data_processor = DataProcessor()
+        if data_processor.process_data(data, inicio_intervalo, fim_intervalo):
+            print("Dados processados e salvos no Amazon S3 com sucesso!")
+        else:
+            email_sender = EmailSender()
+            email_sender.send_email("Não há dados para o intervalo de tempo especificado.")
+
+if __name__ == "__main__":
+    main()
+```
+
+A função main é onde o fluxo principal do programa é orquestrado.
+Configura os parâmetros para a chamada à API do LinkedIn, definindo o intervalo de tempo, organização alvo, etc.
+Usa a classe LinkedInAPI para buscar os dados da API.
+Se os dados forem obtidos, instancia a classe DataProcessor e tenta processar os dados.
+Se o processamento for bem-sucedido, imprime uma mensagem de sucesso. Caso contrário, chama a classe EmailSender para enviar um e-mail de alerta.
+
