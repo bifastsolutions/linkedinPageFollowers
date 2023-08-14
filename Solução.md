@@ -130,6 +130,7 @@ os:
 
 A biblioteca os é uma biblioteca padrão do Python que fornece funções para interagir com o sistema operacional, incluindo a manipulação de caminhos de arquivos, variáveis de ambiente, entre outros.
 No contexto do código, a biblioteca os não está sendo usada diretamente no código que você forneceu. No entanto, é comum utilizá-la para manipular caminhos de arquivos, checar a existência de arquivos ou diretórios, entre outras operações relacionadas ao sistema operacional.
+
 dotenv:
 
 A biblioteca dotenv não faz parte da biblioteca padrão do Python. É uma biblioteca de terceiros que permite carregar variáveis de ambiente a partir de um arquivo .env.
