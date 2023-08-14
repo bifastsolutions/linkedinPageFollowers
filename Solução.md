@@ -1,4 +1,4 @@
-![Funções Lambda](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/da47c56d-6604-4143-9c80-22285bb272c8)# Desafio
+# Desafio
 
 Uma empresa possui a página de sua empresa no linkedin e gostaria de acompnhar o acrescimo e decrescimo de seguidores de sua página fora das limitações e do que é oferecido pelo linkedin,
 ou seja, deseja ter mais liberdade na utilização dos dados de seguidores de linkedin, realizando cruzamento com dados de outras das suas redes sociais como o facebook, twitter e instagram,
