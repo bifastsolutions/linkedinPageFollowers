@@ -1,4 +1,4 @@
-# Desafio
+![Funções Lambda](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/da47c56d-6604-4143-9c80-22285bb272c8)# Desafio
 
 Uma empresa possui a página de sua empresa no linkedin e gostaria de acompnhar o acrescimo e decrescimo de seguidores de sua página fora das limitações e do que é oferecido pelo linkedin,
 ou seja, deseja ter mais liberdade na utilização dos dados de seguidores de linkedin, realizando cruzamento com dados de outras das suas redes sociais como o facebook, twitter e instagram,
@@ -298,4 +298,43 @@ Configura os parâmetros para a chamada à API do LinkedIn, definindo o interval
 Usa a classe LinkedInAPI para buscar os dados da API.
 Se os dados forem obtidos, instancia a classe DataProcessor e tenta processar os dados.
 Se o processamento for bem-sucedido, imprime uma mensagem de sucesso. Caso contrário, chama a classe EmailSender para enviar um e-mail de alerta.
+
+# Serviços na AWS
+
+### EC2
+
+A VM que que foi criada no EC2 possui 2 funções muito importante, uma delas é ter o código na VM que irá rodar através de um arquivo .bat agendado pelo agendador do windows, isso economizará recurso de ETL como
+uso de um serviço como o GLUE, e a outra função é de ter instalado o gateway do Power BI para rodas as atualizações dos daods conforme o agendamento do Power BI online e tambem a configuração do drive ODBC do Athena deve ser configurado com suas credenciais, por conta disso deve-se criar uma imagem do Windows Server com uma t2.micro que possui free tier em x quantidade de horas mês por 1 ano, evitando mais um custo desnecessário.
+
+ ![VM no EC2](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/c489987e-ab86-4a0b-9085-e9829cdf7dd5)
+
+### LAMBDA e EVENTBRIDGE
+
+Pensando no futuro após 1 ano e evitar que a VM fique ligada 24h por dia e tendo cobrança alta, através de scripts python no lambda para ligar e desligar a VM juntamento com o scheduler no eventbridge a VM ficará ligada apenas 1 hora por dia, tempo suficiente para rodar o código e atualizar os dados através do gateway do Power BI.
+
+
+![Funções Lambda](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/a45443ca-2bab-4931-ad5c-6e1451c95a33)
+
+
+![Exemplo schedule EVENTBRIDGE](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/08ccb061-383c-45d4-a16c-95dd34350344)
+
+### CRAWLER, CATALOG e ATHENA
+
+Através do dados salvos no Bucket do S3, eles serão enviados em forma de tabela para o Athena, esses dados quando transformaos em tabela criam um catalogo de dados sobre as colunas da
+tabela enviada, esse catalogo de dados além de você poder colocar a descrição manualmente do significado da coluna, traz tambem a possibilidade de alteração do tipo de dados, caso o ETL
+não tenha conseguido fixar de forma correta e persistente. O Athena servirá como um "Data Warehouse", sendo possível realizar consultas me sql que são cobradas apenas quando realizadas.
+
+
+![Data Catalog](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/fb869c53-6669-43e7-b293-a89c2926a6e3)
+
+
+![Athena](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/73f69119-82da-474c-afdc-121730a01687)
+
+
+
+
+
+
+
+
 
