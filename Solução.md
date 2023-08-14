@@ -331,10 +331,20 @@ não tenha conseguido fixar de forma correta e persistente. O Athena servirá co
 ![Athena](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/73f69119-82da-474c-afdc-121730a01687)
 
 
+### POWER BI
+
+E o Power BI consome os dados do Athena que é alimnentado e atualiado diariamente, abaixo um exemplo básico e simples de uso apenas para validação.
+
+![Exemplo Power BI](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/d169a78f-f7ba-4797-845c-8e8067f8b268)
 
 
+# Entrega de valor
 
-
+ A solução permitiu aos gestores acessar as informações de seguidores do linkedin em um ambiente com visão integrada e dinâmica (power BI), com custo quase zero de infraestrutura, com economia através do S3,
+VM no EC2 com liga e desliga automatico por apenas 1 hora, tendo a segurança de uso na Cloud unindo recursos simples com a utilização de agendamento do próprio windows, a solução trouxe economia e velocidade
+no desenvolvimento, pois além de não haver a necessidade de comprar um servidor fisico a construção da arquietura de dados em cloud e rapidamente levantado, como tambem caso o cliente desista é facilmente
+destruído com total segurança. Os dados poderão ser cruzados com outras fontes de informações e poderão ser utilizados com agragações e etc. Esse projeto também tem a intenção de mostrar que mesmos projetos
+simples podem tirar um bom proveito da computação em nuvem.
 
 
 
