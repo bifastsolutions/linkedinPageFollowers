@@ -1,4 +1,4 @@
-# Desafio
+![Linkedin API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/86baedf6-a491-4587-b582-1be5e848b806)# Desafio
 
 Uma empresa possui a página de sua empresa no linkedin e gostaria de acompnhar o acrescimo e decrescimo de seguidores de sua página fora das limitações e do que é oferecido pelo linkedin,
 ou seja, deseja ter mais liberdade na utilização dos dados de seguidores de linkedin, realizando cruzamento com dados de outras das suas redes sociais como o facebook, twitter e instagram,
@@ -33,49 +33,18 @@ metas e projeções.
 
 ## Configuração da API do linkedin
 
-●	Entre em https://developer.linkedin.com/ 
-●	Realize o acesso utilizando suas credenciais, navegue até a seção "My Apps" e clique em "Create app". Nesse local, será necessário preencher os dados solicitados, tais como o título da aplicação, o endereço da página de sua empresa no LinkedIn e o logotipo.
+Segue explicação resumida dos passos necessários para configurar e acessar a API do LinkedIn em um aplicativo.
+- Primeiro, após criar o aplicativo, você deve verificar o mesmo através da geração de uma URL na seção "Settings".
+- Em seguida, você será redirecionado para uma tela de confirmação.
+- Na seção "products", são apresentadas as opções de uso da API do LinkedIn, cada uma com sua própria documentação e permissões.
+- Para obter acesso, é preciso gerar um token de verificação na seção "Auth", selecionando OAuth 2.0 tools e criando o token com os escopos desejados.
+- Uma vez concluído, o token permite solicitações de acordo com os produtos selecionados.
+- Para acessar dados de seguidores, é necessário ativar o advertising API, preencher um formulário do LinkedIn e aguardar a aprovação, que não é automática.
 
-![Create an app](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/fc2fff91-920f-4221-a5fb-cf9d4e56b79c)
-
-
-●	Após concluir a criação do aplicativo, acesse a seção de "Settings" e proceda com a verificação do app. Gere a URL na etapa seguinte, copie-a e cole-a na barra de endereços do navegador. Em seguida, você será redirecionado para uma tela de confirmação indicando que a verificação foi realizada com sucesso.
-
-![Settings](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/98b14d4b-f5e4-497b-a18a-af113ff42c6b)
-
-
-●	Na seção de "products" terá as opções do que é possível fazer com a API do LinkedIn junto com a documentação para cada caso, onde mostra como você deve utilizar ao fazer os "requests". Libere o acesso pelo "Request access".
-
-![Products](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/ece6bf2b-f11b-4b41-8426-a0a0f2ca6101)
-
-
-● Com o intuito de gerar o token de verificação para acesso aos itens disponíveis, é necessário acessar a seção de Auth e selecionar a alternativa localizada ao lado direito denominada  OAuth 2.0 tools.
-
-![OAuth 2.0 tools](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/d158c4dc-a6a6-4311-9386-7312a535336f)
-
-
-●	Entre em "create token", escolha os scopes(permissões) desejados e crie seu token para utilização.
-
-
-![create token](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/51da68c1-ce94-438e-8cc8-a05b26df78ed)
-
-
-![Token](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/79836aae-ad85-4d1e-b965-d20109c0ab1f)
-
-● Após concluir essas etapas, você obterá o seu token de acesso, permitindo que você faça solicitações de acordo com os products que foram selecionados. É importante lembrar que cada product possui sua própria documentação exclusiva para realizar as solicitações.
-
-● Para obter as permissões necessárias para extrair os dados de seguidores, é fundamental ativar o advertising API e completar um formulário fornecido pelo LinkedIn. O formulário incluirá algumas perguntas sobre a sua empresa e os motivos pelos quais deseja habilitar esse produto. É importante destacar que o LinkedIn enfatiza que a aprovação não é automática, podendo levar alguns dias até que você receba uma resposta.
-
-## Permissões sem ativar advertising API
-
-![Permissões sem ativar advertising API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/1ffbb1b0-ee36-4958-ae66-819a44a33ab8)
-
-## Permissões depois de ativar advertising API
-
-![Permissões depois de ativar advertising API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/b26bfa33-264c-48f1-9490-0023d5bf045f)
-
+![Linkedin API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/5592c369-5e4f-493e-b23f-bd9ea9a06471)
 
 # Solução
+
 
 Como se trata de algo muito simples, não vi a necessidade de separar os dados da API em zonas em uma Data Lake, usei apenas um código que realiza a extração, tratamento e carga no S3, sendo nesse caso um ETL e não um ELT, o código não demora nem 10s para rodar e carregar os dados que são feitos diariamente, o código foi todo feito em OOP pois achei melhor a divisão das class e suas funções como blocos onde cada um executa uma determinada ação, deixando assim mais organizado, estarei explicando tudo com mais detalhes abaixo mostrando o código.
 
