@@ -2,8 +2,7 @@
 
 Uma empresa possui a página de sua empresa no linkedin e gostaria de acompnhar o acrescimo e decrescimo de seguidores de sua página fora das limitações e do que é oferecido pelo linkedin,
 ou seja, deseja ter mais liberdade na utilização dos dados de seguidores de linkedin, realizando cruzamento com dados de outras das suas redes sociais como o facebook, twitter e instagram,
-entender o comportamento desses dados junto com outras ações que a empresa toma (será que isso está influenciando o numero de seguidores aumentar ou diminuir?) e poder trabalhar com agragações,
-metas e projeções.
+entender o comportamento desses dados junto com outras ações que a empresa toma (será que isso está influenciando o número de seguidores aumentar ou diminuir?) e poder trabalhar com agragações, metas e projeções.
 
 # Quais a principais perguntas que devem ser respondidas (qual é a dor?)
 
