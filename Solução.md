@@ -42,7 +42,7 @@ Segue explicação resumida dos passos necessários para configurar e acessar a 
 - Uma vez concluído, o token permite solicitações de acordo com os produtos selecionados.
 - Para acessar dados de seguidores, é necessário ativar o advertising API, preencher um formulário do LinkedIn e aguardar a aprovação, que não é automática.
 
-![Linkedin API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/dc65bfe0-e177-466a-a1b2-f82c97d362c8)
+![Linkedin API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/a2755211-f9f5-4fab-83c2-a680c729cc70)
 
 
 # Solução
