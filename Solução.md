@@ -42,7 +42,8 @@ Segue explicação resumida dos passos necessários para configurar e acessar a 
 - Uma vez concluído, o token permite solicitações de acordo com os produtos selecionados.
 - Para acessar dados de seguidores, é necessário ativar o advertising API, preencher um formulário do LinkedIn e aguardar a aprovação, que não é automática.
 
-![Linkedin API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/5592c369-5e4f-493e-b23f-bd9ea9a06471)
+![Linkedin API](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/dc65bfe0-e177-466a-a1b2-f82c97d362c8)
+
 
 # Solução
 
@@ -184,7 +185,8 @@ do código é muito importante, pois evita que você passe as credenciais da AWS
 
 Os arquivos são salvos no S3 com o nome padronizado em D-3 pois a API não disponibiliza os dados antes disso.
 
-![S3 Bucket](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/0bb1d64c-8428-4981-bf87-a8fec86d4bf5)
+
+![S3 Bucket](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/8b4ce534-8d0a-4f7b-9a4e-3035e7637763)
 
 
 ### Class EmailSender:
@@ -277,17 +279,19 @@ Se o processamento for bem-sucedido, imprime uma mensagem de sucesso. Caso contr
 A VM que que foi criada no EC2 possui 2 funções muito importante, uma delas é ter o código na VM que irá rodar através de um arquivo .bat agendado pelo agendador do windows, isso economizará recurso de ETL como
 uso de um serviço como o GLUE, e a outra função é de ter instalado o gateway do Power BI para rodas as atualizações dos daods conforme o agendamento do Power BI online e tambem a configuração do drive ODBC do Athena deve ser configurado com suas credenciais, por conta disso deve-se criar uma imagem do Windows Server com uma t2.micro que possui free tier em x quantidade de horas mês por 1 ano, evitando mais um custo desnecessário.
 
- ![VM no EC2](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/c489987e-ab86-4a0b-9085-e9829cdf7dd5)
+![VM no EC2](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/9fb2b2f4-74c8-439b-96bc-9f8d1b45c633)
+
 
 ### LAMBDA e EVENTBRIDGE
 
 Pensando no futuro após 1 ano e evitar que a VM fique ligada 24h por dia e tendo cobrança alta, através de scripts python no lambda para ligar e desligar a VM juntamento com o scheduler no eventbridge a VM ficará ligada apenas 1 hora por dia, tempo suficiente para rodar o código e atualizar os dados através do gateway do Power BI.
 
 
-![Funções Lambda](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/a45443ca-2bab-4931-ad5c-6e1451c95a33)
+![Funções Lambda](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/93c72ae9-e8a6-4121-a6cd-99dd1c98bf7e)
 
 
-![Exemplo schedule EVENTBRIDGE](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/08ccb061-383c-45d4-a16c-95dd34350344)
+![Exemplo schedule EVENTBRIDGE](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/d6167853-434e-41fc-abef-71c98a838d54)
+
 
 ### CRAWLER, CATALOG e ATHENA
 
@@ -296,17 +300,20 @@ tabela enviada, esse catalogo de dados além de você poder colocar a descriçã
 não tenha conseguido fixar de forma correta e persistente. O Athena servirá como um "Data Warehouse", sendo possível realizar consultas me sql que são cobradas apenas quando realizadas.
 
 
-![Data Catalog](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/fb869c53-6669-43e7-b293-a89c2926a6e3)
+![Data Catalog](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/ab77382f-224a-4943-b935-aa9ae780a035)
 
 
-![Athena](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/73f69119-82da-474c-afdc-121730a01687)
+
+![Athena](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/9a94a7a9-68d8-402e-b633-d3d9ae55ef87)
+
 
 
 ### POWER BI
 
 E o Power BI consome os dados do Athena que é alimnentado e atualiado diariamente, abaixo um exemplo básico e simples de uso apenas para validação.
 
-![Exemplo Power BI](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/d169a78f-f7ba-4797-845c-8e8067f8b268)
+
+![Exemplo Power BI](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/70fb0a61-a643-44be-94a3-3d6903bff694)
 
 
 # Entrega de valor
