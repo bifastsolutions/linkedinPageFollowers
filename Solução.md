@@ -186,7 +186,8 @@ do código é muito importante, pois evita que você passe as credenciais da AWS
 Os arquivos são salvos no S3 com o nome padronizado em D-3 pois a API não disponibiliza os dados antes disso.
 
 
-![S3 Bucket](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/8b4ce534-8d0a-4f7b-9a4e-3035e7637763)
+
+![S3 Bucket](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/bc115133-d0a2-468b-9539-f676f6682e09)
 
 
 ### Class EmailSender:
