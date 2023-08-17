@@ -17,7 +17,8 @@ entender o comportamento desses dados junto com outras ações que a empresa tom
 
 # Pipeline de dados
 
-![Pipeline linkedinFollowers](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/188d489a-c471-4065-969f-dc83b4d028ba)
+![Pipeline linkedinFollowers](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/c67c6eee-64f5-45f1-9a50-ee154e267146)
+
 
 
 ## Serviços da AWS utilizados
