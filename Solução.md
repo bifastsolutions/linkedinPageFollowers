@@ -230,6 +230,9 @@ As informações de email e senha ficam em um arquivo separado .env por seguran�
 Utiliza a biblioteca smtplib para se conectar a um servidor SMTP (neste caso, o servidor do Outlook) e envia o e-mail.
 Imprime uma mensagem quando o e-mail é enviado com sucesso.
 
+![Exemplo email resposta](https://github.com/bifastsolutions/linkedinPageFollowers/assets/134235178/e368c14f-dedc-4c20-b1ac-bca193aff8c9)
+
+
 ### Função Main:
 
 
