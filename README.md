@@ -17,3 +17,19 @@ Como utilizar a API do linkedin para acompanhar o crescimento dos seguidores da 
 - Entrega de valor
 - Agilidade na tomada de decisão
 - Acompanhamento diário de forma visual
+
+
+# Tecnologias utilizadas
+
+- VS Code
+- Python
+- Power BI
+- AWS
+  - Glue
+  - S3
+  - Athena
+  - IAM
+  - EC2
+  - Event Bridge
+- SQL 
+- Trello
